@@ -1,0 +1,18 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "weaponType": "WEAPON_TYPE_PISTOL",
+  "weapon"
+  "damage": "2d6+2",
+  "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
+  "size": "WEAPON_SIZE_SMALL",
+  "initiative": 0,
+  "accuracy": 0,
+  "minStrength": 3,
+  "weight": 1.5,
+  "rangeModifier": 2,
+  "rof": 4,
+  "ammo": 6,
+  "ammoType": "AMMO_BULLET_9MM",
+  "properties": []
+}

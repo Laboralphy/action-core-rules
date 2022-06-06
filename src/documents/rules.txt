@@ -1,0 +1,20 @@
+Armors
+------
+- Armor value : reduce damage inflicted
+- Armor location : indicated which location is protected by armor when deflecting random hits
+- Armors have minimum strength required
+- Can have flags like : HALF_VALUE_AGAINST_BLUNT_DAMAGE
+
+Item {
+    type: 0
+    armor: {
+        value: 0,
+    }
+    properties: [
+        {
+            property: 'armor-factor',
+            value: 0.5,
+            damageType: 'blunt'
+        }
+    ]
+}

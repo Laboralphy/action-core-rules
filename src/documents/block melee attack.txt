@@ -1,0 +1,22 @@
+Bloquer une attaque de mélée
+----------------------------
+
+Jet de compétence :
+REF + Compétence + 1 >= Jet d'attaque
+
+Jet réussi :
+attaque parée
++4 INI pour la prochaine attaque de cet attaquant
++2 DEF contre attaque de mélée pendant 1 tour
+
+To Block a HTH or melee attack, the character must make a
+successful skill roll, using his REF + appropriate combat skill +1.
+If the effect number of the Block roll is equal to or greater than
+the effect number of the attacker’s skill roll, the attack has been
+blocked and the blocking character gains a +4 to his INI against
+his attacker on the next turn. This INI bonus does not apply to
+actions against characters other than the attacker whose attack
+was blocked.
+Characters who are blocking a melee attack receive a bonus
+of +2 to their DEF against melee attacks, but no bonus against
+ranged attacks. This bonus lasts until their next action.

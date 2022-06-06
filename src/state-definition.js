@@ -19,10 +19,24 @@ function buildInitialState () {
             },
         },
         gauges: {
-            damdeadly: 0,
-            damstunning: 0
+            damages: {
+                lethal: 0,
+                stunning: 0,
+            }
         },
-        effects: []
+        effects: [],
+        equipment: {
+            head: 0,
+            neck: 0,
+            chest: 0,
+            arms: 0,
+            leftFinger: 0,
+            rightFinger: 0,
+            meleeWeapon: 0,
+            rangedWeapon: 0,
+            ammo: 0,
+            offHandMeleeWeapon: 0
+        }
     }
 }
 

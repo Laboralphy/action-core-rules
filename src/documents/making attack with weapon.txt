@@ -1,0 +1,34 @@
+Jet d'attaque avec arme
+-----------------------
+REF + WeaponSkill + 3d6 + AttackModifier >= TargetNumber
+
+AttackModifiers
+  Target size
+    gargantuan (ship, bridge) : +12
+    huge (whale, house) : +6
+    very large (city bus, mecha) : +4
+    large (horse, car, tree): +2
+    medium (human) : 0
+    small (dog, barrel) : -2
+    very small (cat, head, limb) : -4
+    tiny : (mouse, bullseye) : -6
+  Target visibility
+    invisible : -5
+    good cover : -3
+    poor cover : -1
+
+
+
+TargetNumber = DEF de la cible + DefenseModifier
+
+DefenseModifiers
+Partially Encumbered : -1
+Greatly Encumbered : -3
+
+
+
+With this action, the character attacks an opponent or object
+with a readied weapon. The character makes an attack roll using
+his REF + (appropriate weapon skill) + 3d6. If successful, the
+attack inflicts damage as per the weapon listing (see Weapons,
+page 75.)
