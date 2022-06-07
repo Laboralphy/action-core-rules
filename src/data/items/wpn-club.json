@@ -1,8 +1,9 @@
 {
   "type": "ENTITY_TYPE_ITEM",
   "itemType": "ITEM_TYPE_WEAPON",
-  "weaponType": "WEAPON_TYPE_MELEE",
-  "weaponMeleeType": "WEAPON_MELEE_TYPE_CLUB",
+  "weaponCategory": "WEAPON_CATEGORY_MELEE",
+  "weaponTechLevel": "WEAPON_TECH_LEVEL_LOW",
+  "weaponType": "WEAPON_TYPE_CLUB",
   "damage": "3d6",
   "damageTypes": ["DAMAGE_TYPE_BLUNT", "DAMAGE_TYPE_LETHAL"],
   "size": "WEAPON_SIZE_MEDIUM",

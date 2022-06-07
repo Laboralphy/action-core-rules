@@ -1,8 +1,9 @@
 {
   "type": "ENTITY_TYPE_ITEM",
   "itemType": "ITEM_TYPE_WEAPON",
-  "weaponType": "WEAPON_TYPE_PISTOL",
-  "weapon"
+  "weaponCategory": "WEAPON_CATEGORY_SMALL_ARM",
+  "weaponTechLevel": "WEAPON_TECH_LEVEL_MODERN",
+  "weaponType": "WEAPON_TYPE_PISTOL_9MM_SHORT",
   "damage": "2d6+2",
   "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
   "size": "WEAPON_SIZE_SMALL",
@@ -10,9 +11,9 @@
   "accuracy": 0,
   "minStrength": 3,
   "weight": 1.5,
+  "properties": [],
   "rangeModifier": 2,
   "rof": 4,
   "ammo": 6,
-  "ammoType": "AMMO_BULLET_9MM",
-  "properties": []
+  "ammoType": "AMMO_BULLET_9MM"
 }

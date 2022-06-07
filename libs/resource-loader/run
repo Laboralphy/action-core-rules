@@ -1,0 +1,8 @@
+#!/bin/bash
+pushd .
+cd ~/projects/plasmud/libs/mud/modules/test
+rm *.zip
+zip -r test.zip *
+popd
+node index.js
+
