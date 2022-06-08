@@ -1,0 +1,7 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_AMMO",
+  "ammoType": "AMMO_TYPE_9MM",
+  "techLevel": "TECH_LEVEL_MODERN",
+  "properties": []
+}

@@ -1,0 +1,15 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "weaponCategory": "WEAPON_CATEGORY_MELEE",
+  "weaponType": "WEAPON_TYPE_RAPIER",
+  "techLevel": "TECH_LEVEL_LOW",
+  "damage": "3d6",
+  "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
+  "size": "WEAPON_SIZE_MEDIUM",
+  "initiative": 0,
+  "accuracy": 0,
+  "minStrength": 3,
+  "weight": 3,
+  "properties": []
+}
