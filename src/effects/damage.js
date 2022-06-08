@@ -6,8 +6,8 @@ const createEffect = require('./abstract')
  * @param type {number} DAMAGE_TYPE_
  * @returns {ActionRulesEffect}
  */
-function create (nValue, type) {
-    return createEffect('damage', nValue, { type })
+function create ({ amount, type }) {
+    return createEffect('damage', amount, { type })
 }
 
 /**
@@ -17,7 +17,10 @@ function create (nValue, type) {
  */
 function mutate ({ effect, target }) {
     // Removing armor and TGH
-    target.store.mutations.applyDamage(effect.amp)
+    target.store.mutations.applyDamage({
+        amount: effect.amp,
+        type: effect.data.type
+    })
 }
 
 module.exports = {

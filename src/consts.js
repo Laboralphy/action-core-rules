@@ -5,5 +5,7 @@ module.exports = {
     DAMAGE_TYPE_BLUNT: 3, // Can be reduce bu TGH and armor
     DAMAGE_TYPE_SPECIAL: 4,
 
-    ITEM_TYPE_ARMOR: 'ITEM_TYPE_ARMOR'
+    ITEM_TYPE_ARMOR: 'ITEM_TYPE_ARMOR',
+
+    CONDITION_STUNNED: 'CONDITION_STUNNED',
 }

@@ -6,7 +6,7 @@ let oResourceLoader
 async function getResourceLoader () {
     if (!oResourceLoader) {
         oResourceLoader = new ResourceLoader()
-        await oResourceLoader.loadFromFolder(path.resolve(__dirname, './data'))
+        await oResourceLoader.loadFromFolder(path.resolve(__dirname, './blueprints'))
     }
     return oResourceLoader
 }

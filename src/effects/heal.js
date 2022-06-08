@@ -5,8 +5,8 @@ const createEffect = require('./abstract')
  * @param nValue {string}
  * @returns {ActionRulesEffect}
  */
-function create (nValue) {
-    return createEffect('heal', nValue)
+function create ({ amount }) {
+    return createEffect('heal', amount)
 }
 
 /**

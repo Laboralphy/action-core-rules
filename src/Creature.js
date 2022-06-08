@@ -27,6 +27,10 @@ class Creature {
         return this._effectProcessor
     }
 
+    set id (value) {
+        this._id = value
+    }
+
     get id () {
         return this._id
     }
