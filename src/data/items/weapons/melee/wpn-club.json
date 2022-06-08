@@ -3,13 +3,13 @@
   "itemType": "ITEM_TYPE_WEAPON",
   "weaponCategory": "WEAPON_CATEGORY_MELEE",
   "weaponType": "WEAPON_TYPE_CLUB",
-  "techLevel": "TECH_LEVEL_LOW",
   "damage": "3d6",
   "damageTypes": ["DAMAGE_TYPE_BLUNT", "DAMAGE_TYPE_LETHAL"],
-  "size": "WEAPON_SIZE_MEDIUM",
+  "reach": "WEAPON_REACH_MEDIUM",
   "initiative": -1,
   "accuracy": 0,
   "minStrength": 3,
   "weight": 1,
-  "properties": []
+  "properties": [],
+  "specific": {}
 }
