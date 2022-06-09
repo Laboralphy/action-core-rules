@@ -2,19 +2,19 @@
   "type": "ENTITY_TYPE_ITEM",
   "itemType": "ITEM_TYPE_WEAPON",
   "stackable": false,
-  "weight": 2,
+  "weight": 0.5,
   "properties": [],
   "weapon": {
     "category": "WEAPON_CATEGORY_PISTOL",
-    "damage": "6d6",
+    "damage": "2d6",
     "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
     "initiative": 0,
-    "accuracy": 1,
-    "minStrength": 3,
+    "accuracy": -1,
+    "minStrength": 2,
     "ranged": {
-      "rof": 5,
-      "clipSize": 40,
-      "ammoType": "AMMO_TYPE_ENERGY_CELL"
+      "rof": 3,
+      "clipSize": 6,
+      "ammoType": "AMMO_TYPE_CARTRIDGE_PISTOL"
     }
   }
 }

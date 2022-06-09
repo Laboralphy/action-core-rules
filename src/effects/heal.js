@@ -3,7 +3,7 @@ const createEffect = require('./abstract')
 /**
  * Remove damage point previously taken
  * @param nValue {string}
- * @returns {ActionRulesEffect}
+ * @returns {ActionEffect}
  */
 function create ({ amount }) {
     return createEffect('heal', amount)

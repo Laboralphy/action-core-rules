@@ -1,5 +1,5 @@
 /**
- * @typedef ActionRulesEffect {object}
+ * @typedef ActionEffect {object}
  * @property tag {string} effect tag
  * @property amp {number} effect amplitude
  * @property duration {number} effect duration (in turns)
@@ -12,7 +12,7 @@
  * @param tag {string}
  * @param amp {number}
  * @param data {object}
- * @returns {ActionRulesEffect}
+ * @returns {ActionEffect}
  */
 module.exports = function create (tag, amp = 0, data = {}) {
     return {

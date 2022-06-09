@@ -1,0 +1,19 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "stackable": false,
+  "weight": 2,
+  "properties": [],
+  "weapon": {
+    "category": "WEAPON_CATEGORY_BLUNT",
+    "damage": "3d6",
+    "damageTypes": ["DAMAGE_TYPE_BLUNT", "DAMAGE_TYPE_LETHAL"],
+    "initiative": -1,
+    "accuracy": 0,
+    "minStrength": 3,
+    "melee": {
+      "reach": 2,
+      "material": "MATERIAL_WOOD"
+    }
+  }
+}

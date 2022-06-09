@@ -1,0 +1,14 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "stackable": false,
+  "weaponCategory": "WEAPON_CATEGORY_MELEE",
+  "weaponType": "WEAPON_TYPE_CLUB",
+  "damage": "3d6",
+  "damageTypes": ["DAMAGE_TYPE_BLUNT", "DAMAGE_TYPE_LETHAL"],
+  "reach": 2,
+  "initiative": -1,
+  "accuracy": 0,
+  "weight": 1,
+  "properties": []
+}

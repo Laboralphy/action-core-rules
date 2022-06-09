@@ -2,7 +2,7 @@ const createEffect = require('./abstract')
 /**
  * This effect add a negative condition to the targetted creature
  * @param condition {string} CONDITION_*
- * @returns {ActionRulesEffect}
+ * @returns {ActionEffect}
  */
 function create ({ condition }) {
     return createEffect('condition', 1, {

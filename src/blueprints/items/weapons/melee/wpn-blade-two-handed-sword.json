@@ -1,0 +1,19 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "stackable": false,
+  "weight": 4,
+  "properties": [],
+  "weapon": {
+    "category": "WEAPON_CATEGORY_BLADE",
+    "damage": "5d6",
+    "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
+    "initiative": -1,
+    "accuracy": -1,
+    "minStrength": 7,
+    "melee": {
+      "reach": 1,
+      "material": "MATERIAL_STEEL"
+    }
+  }
+}

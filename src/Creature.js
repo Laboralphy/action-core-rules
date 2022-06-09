@@ -1,5 +1,5 @@
 const Reactor = require('../libs/o876-rudimentary-reactor')
-const { buildInitialState } = require('./state-definition')
+const { buildInitialState } = require('./creature-state-definition')
 const CONFIG = require('./config')
 const { getNextId } = require('./IdentifierRegistry')
 
@@ -254,6 +254,14 @@ class Creature {
                 if (amount > 0) {
                     oDamageGauges.lethal = Math.max(0, oDamageGauges.lethal - amount)
                 }
+            }
+        }
+
+        oMutations.equipItem = ({ state }, { slot, item }) => {
+            if (slot in state.equipment) {
+                state.equipment[slot] = item
+            } else {
+                throw new Error('ERR_EQUIPMENT_SLOT_INVALID: ' + slot)
             }
         }
         return oMutations

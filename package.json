@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@laboralphy/did-you-mean": "^2.1.0",
     "adm-zip": "^0.5.9",
-    "jasmine": "^4.1.0"
+    "jasmine": "^4.1.0",
+    "jsonschema": "^1.4.1"
   }
 }

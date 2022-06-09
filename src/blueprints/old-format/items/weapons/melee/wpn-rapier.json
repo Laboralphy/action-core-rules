@@ -1,0 +1,14 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "stackable": false,
+  "weaponCategory": "WEAPON_CATEGORY_MELEE",
+  "weaponType": "WEAPON_TYPE_RAPIER",
+  "damage": "3d6",
+  "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
+  "reach": 2,
+  "initiative": 0,
+  "accuracy": 0,
+  "weight": 3,
+  "properties": []
+}

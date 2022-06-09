@@ -3,7 +3,7 @@ const createEffect = require('./abstract')
  * This effect modifies an attribute by adding/subtracting an fixed value
  * @param attribute {string} attribute to be modified
  * @param value {number}
- * @returns {ActionRulesEffect}
+ * @returns {ActionEffect}
  */
 function create ({ attribute, value }) {
     return createEffect('attribute-modifier', value, {

@@ -4,7 +4,7 @@ const createEffect = require('./abstract')
  * Inflict damage
  * @param nValue
  * @param type {number} DAMAGE_TYPE_
- * @returns {ActionRulesEffect}
+ * @returns {ActionEffect}
  */
 function create ({ amount, type }) {
     return createEffect('damage', amount, { type })
@@ -12,7 +12,7 @@ function create ({ amount, type }) {
 
 /**
  * Apply effect modification on effect target
- * @param effect {ActionRulesEffect}
+ * @param effect {ActionEffect}
  * @param target {Creature}
  */
 function mutate ({ effect, target }) {

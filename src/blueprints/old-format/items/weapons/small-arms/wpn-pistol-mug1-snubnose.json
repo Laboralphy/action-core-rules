@@ -1,0 +1,18 @@
+{
+  "type": "ENTITY_TYPE_ITEM",
+  "itemType": "ITEM_TYPE_WEAPON",
+  "stackable": false,
+  "weaponCategory": "WEAPON_CATEGORY_SMALL_ARM",
+  "weaponType": "WEAPON_TYPE_PISTOL",
+  "damage": "4d6",
+  "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
+  "reach": "WEAPON_REACH_NONE",
+  "initiative": 0,
+  "accuracy": -1,
+  "weight": 1.5,
+  "minStrength": 3,
+  "properties": [],
+  "rof": 3,
+  "clipSize": 6,
+  "ammoType": "AMMO_TYPE_BULLET"
+}
