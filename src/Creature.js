@@ -2,6 +2,11 @@ const Reactor = require('../libs/o876-rudimentary-reactor')
 const { buildInitialState } = require('./creature-state-definition')
 const CONFIG = require('./config')
 const { getNextId } = require('./IdentifierRegistry')
+const requireDirModules = require('../libs/require-dir-scripts')
+const path = require("path");
+const STORE_PATH = path.resolve(__dirname, './store')
+const MUTATIONS = requireDirModules(path.join(STORE_PATH, '/mutations'))
+const GETTERS = requireDirModules(path.join(STORE_PATH, '/getters'))
 
 class Creature {
     constructor () {
@@ -172,7 +177,9 @@ class Creature {
      * @private
      */
     _configureGetters () {
-        const oGetters = {}
+        const oGetters = {
+            ...GETTERS
+        }
         for (const a in this._state.attributes.main) {
             this._configureAttributeBonusGetter(oGetters, a)
             this._configureMainAttributeGetter(oGetters, a)
@@ -181,12 +188,6 @@ class Creature {
             this._configureAttributeBonusGetter(oGetters, a)
             this._configureDerivatedAttributeGetter(oGetters, a)
         }
-
-        oGetters.getDamages = state => state.gauges.damages.lethal + state.gauges.damages.stunning
-        oGetters.getHP = (state, getters) => getters.getAttributeLIF - getters.getDamages
-        oGetters.isAlive = (state, getters) => getters.getHP > 0
-        oGetters.isKO = (state, getters) => getters.getHP <= 0 && state.gauges.damages.stunning > 0
-        oGetters.isDead = (state, getters) => state.gauges.damages.lethal >= getters.getAttributeLIF
 
         return oGetters
     }
@@ -197,7 +198,9 @@ class Creature {
      * @private
      */
     _configureMutations () {
-        const oMutations = {}
+        const oMutations = {
+            ...MUTATIONS
+        }
         Object
             .keys(this._state.attributes.main)
             .forEach(a => {
@@ -206,64 +209,7 @@ class Creature {
                         state.attributes.main[a].value = Math.max(0, Math.floor(value))
                     }
             })
-        /**
-         * Inflict PHYSICAL damage to the creature.
-         * Type may be 1 (lethal) or 2 (stunning)
-         * If a creature get HP below 0, it cannot take stunning damage anymore
-         * Instead, the stunning damage (if any, is replaced by lethal)
-         * @param state
-         * @param getters
-         * @param amount {number}
-         */
-        oMutations.applyLethalDamage = ({ state, getters }, { amount }) => {
-            const oDamageGauges = state.gauges.damages
-            if (getters.isKO) {
-                // replace stunning damage first
-                oDamageGauges.stunning = Math.max(0, oDamageGauges.stunning - amount)
-            }
-            oDamageGauges.lethal += amount
-        }
-        /**
-         * Stunning damage is apply only of creature is alive
-         * @param state
-         * @param getters
-         * @param amount {number}
-         */
-        oMutations.applyStunningDamage = ({ state, getters }, { amount }) => {
-            const oDamageGauges = state.gauges.damages
-            if (getters.isAlive) {
-                oDamageGauges.stunning += amount
-            }
-        }
-        oMutations.applyDamage = ({ state, getters, mutations }, { amount, type }) => {
-            if ((type & 1) === 0) {
-                mutations.applyLethalDamage({ amount })
-            } else {
-                mutations.applyStunningDamage({ amount })
-            }
-        }
-        oMutations.heal = ({ state }, { amount }) => {
-            const oDamageGauges = state.gauges.damages
-            // stuning damage is healed first, then lethal damage
-            if (amount <= oDamageGauges.stunning) {
-                // healing stunning damage
-                oDamageGauges.stunning = Math.max(0, oDamageGauges.stunning - amount)
-            } else {
-                amount -= oDamageGauges.stunning
-                oDamageGauges.stunning = 0
-                if (amount > 0) {
-                    oDamageGauges.lethal = Math.max(0, oDamageGauges.lethal - amount)
-                }
-            }
-        }
 
-        oMutations.equipItem = ({ state }, { slot, item }) => {
-            if (slot in state.equipment) {
-                state.equipment[slot] = item
-            } else {
-                throw new Error('ERR_EQUIPMENT_SLOT_INVALID: ' + slot)
-            }
-        }
         return oMutations
     }
 }

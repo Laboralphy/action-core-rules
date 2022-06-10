@@ -26,6 +26,7 @@ function buildInitialState () {
                 stunning: 0,
             }
         },
+        skills: [],
         effects: [],
         equipment: {
             [CONSTS.EQUIPMENT_SLOT_HEAD]: null,
