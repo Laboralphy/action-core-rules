@@ -1,13 +1,172 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "type": "object",
-  "description": "Structure de définition d'un blueprint d'objet equipable",
+  "description": "Structure de définition d'un blueprint d'objet équipable",
   "definitions": {
-
+    "weaponRanged": {
+      "$id": "#/definitions/weaponRanged",
+      "type": "object",
+      "description": "information spécifiques aux armes à distance",
+      "additionalItems": false,
+      "required": [
+        "rof",
+        "clipSize",
+        "ammoType"
+      ],
+      "properties": {
+        "rof": {
+          "type": "number",
+          "description": "nombre de tir qu'il est possible de shooter en un seul tour de combat"
+        },
+        "clipSize": {
+          "type": "number",
+          "description": "nombre de munition dans le magasin de l'arme"
+        },
+        "ammoType": {
+          "type": "string",
+          "description": "type de munition"
+        }
+      }
+    },
+    "weaponMelee": {
+      "$id": "#/definitions/weaponMelee",
+      "type": "object",
+      "description": "informations spécifiques aux armes de mélée",
+      "additionalItems": false,
+      "required": [
+        "reach"
+      ],
+      "properties": {
+        "reach": {
+          "type": "number",
+          "description": "portée de l'arme de mélée en mètres."
+        },
+        "material": {
+          "type": "string",
+          "description": "matériaux composant le revètement exterieur de l'arme. Certains créatures sont plus sensible à certains matériaux",
+          "examples": [
+            "MATERIAL_SILVER",
+            "MATERIAL_STEEL",
+            "MATERIAL_WOOD",
+            "MATERIAL_ADAMANTIUM"
+          ],
+          "pattern": "^MATERIAL_[_A-Z0-9]+"
+        }
+      }
+    },
+    "weapon": {
+      "$id": "#/definitions/weapon",
+      "type": "object",
+      "description": "information concernant les armes uniquement",
+      "additionalItems": false,
+      "required": [
+        "category",
+        "damage",
+        "damageTypes",
+        "initiative",
+        "accuracy",
+        "minStrength"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "catégorie de l'arme, exemple: épée, dague, fusil..."
+        },
+        "damage": {
+          "type": "string",
+          "description": "quantité de dégâts délivrés à chaque coup. au format xdy+z"
+        },
+        "damageType": {
+          "type": "array",
+          "description": "liste des types de dégâts délivré par l'arme.",
+          "items": [
+            {
+              "type": "string",
+              "description": "un type de dégât délivré par l'arme",
+              "pattern": "^DAMAGE_TYPE_[_A-Z0-9]+$"
+            }
+          ]
+        },
+        "initiative": {
+          "type": "number",
+          "description": "bonus temporaire d'initiative conféré par l'utilisation de l'arme"
+        },
+        "accuracy": {
+          "type": "number",
+          "description": "précision intrinsèque de l'arme"
+        },
+        "minStrength": {
+          "type": "number",
+          "description": "score minimal de force requis pour pouvoir utiliser l'arme avec efficacité."
+        }
+      }
+    },
+    "ammo": {
+      "$id": "#/definitions/ammo",
+      "type": "object",
+      "description": "information concernant les munitions",
+      "required": [
+        "material"
+      ],
+      "properties": {
+        "material": {
+          "type": "string",
+          "description": "materiaux de revètement de la munition",
+          "pattern": "^MATERIAL_[_A-Z0-9]+$"
+        }
+      }
+    }
   },
   "required": [
     "type",
     "itemType",
-    "stackable"
+    "stackable",
+    "weight",
+    "properties"
   ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "type d'entité (toujour de valeur ENTITY_TYPE_ITEM pour les items)",
+      "const": "ENTITY_TYPE_ITEM"
+    },
+    "itemType": {
+      "type": "string",
+      "description": "type d'item. permet de différentier les armes, les munitions, l'équipement etc...",
+      "pattern": "^ITEM_TYPE_[_A-Z0-9]+$"
+    },
+    "stackable": {
+      "type": "boolean",
+      "description": "si true alors l'item peut etre empilé (c'est le cas des petits objet comme les munition, les pièce, les potions etc..."
+    },
+    "weight": {
+      "type": "number",
+      "description": "Poids de l'objet en kg"
+    },
+    "properties": {
+      "description": "liste des item properties, chaque propriété est décrite par un objet contenant au minimum un champ 'property'",
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "property"
+          ],
+          "properties": {
+            "property": {
+              "type": "string",
+              "pattern": "^ITEM_PROPERTY_[_A-Z0-9]+$"
+            }
+          }
+        }
+      ]
+    },
+    "weapon": {
+      "$ref": "#/definitions/weapon"
+    },
+    "ammo": {
+      "$ref": "#/definitions/ammo"
+    }
+  }
 }

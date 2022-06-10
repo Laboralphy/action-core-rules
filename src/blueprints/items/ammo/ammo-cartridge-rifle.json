@@ -3,5 +3,8 @@
   "itemType": "ITEM_TYPE_AMMO",
   "stackable": true,
   "weight": 0.0070,
-  "properties": []
+  "properties": [],
+  "ammo": {
+    "material": "MATERIAL_LEAD"
+  }
 }

@@ -1,17 +1,18 @@
-const Reactor = require('../libs/o876-rudimentary-reactor')
-const { buildInitialState } = require('./creature-state-definition')
-const CONFIG = require('./config')
-const { getNextId } = require('./IdentifierRegistry')
-const requireDirModules = require('../libs/require-dir-scripts')
 const path = require("path");
+const CONFIG = require('./config')
+const Reactor = require('../libs/o876-rudimentary-reactor')
+const TreeSync = require('../libs/tree-sync')
+
+// STORE
 const STORE_PATH = path.resolve(__dirname, './store')
-const MUTATIONS = requireDirModules(path.join(STORE_PATH, '/mutations'))
-const GETTERS = requireDirModules(path.join(STORE_PATH, '/getters'))
+const buildState = require('./store/state')
+const MUTATIONS = TreeSync.recursiveRequire(path.join(STORE_PATH, 'mutations'))
+const GETTERS = TreeSync.recursiveRequire(path.join(STORE_PATH, 'getters'))
 
 class Creature {
     constructor () {
-        this._id = getNextId()
-        this._state = buildInitialState()
+        this._id = 0
+        this._state = buildState()
         this._store = new Reactor({
             state: this._state,
             getters: this._configureGetters(),
@@ -188,7 +189,6 @@ class Creature {
             this._configureAttributeBonusGetter(oGetters, a)
             this._configureDerivatedAttributeGetter(oGetters, a)
         }
-
         return oGetters
     }
 

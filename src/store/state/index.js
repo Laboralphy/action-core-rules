@@ -1,6 +1,6 @@
-const CONSTS = require('./consts')
+const CONSTS = require('../../consts')
 
-function buildInitialState () {
+function buildState () {
     return {
         attributes: {
             groups: ['body', 'mind'],
@@ -14,9 +14,9 @@ function buildInitialState () {
             },
             derivated: {
                 def: { weights: { ref: 1.0 }, add: 10 },
-                ini: { weights: { ref: 0.5, int: 0.5 } },
-                tgh: { weights: { str: 0.5, wil: 0.5 } },
-                lif: { weights: { hlt: 3.0, wil: 2.0 } },
+                ini: { weights: { ref: 0.5, int: 0.5 }, add: 0 },
+                tgh: { weights: { str: 0.5, wil: 0.5 }, add: 0 },
+                lif: { weights: { hlt: 3.0, wil: 2.0 }, add: 0 },
                 mov: { weights: { ref: 1.0, str: 0.5, hlt: 0.5 } }
             },
         },
@@ -26,8 +26,14 @@ function buildInitialState () {
                 stunning: 0,
             }
         },
+        evolution: {
+            xp: 0, // experience points linearly gained by doing things in game
+            level: 0, // level increases when experience is above a certain cap.
+            cp: 0, // character points earned when leveling
+        },
         skills: [],
         effects: [],
+        weaponUsed: CONSTS.EQUIPMENT_SLOT_MELEEWEAPON,
         equipment: {
             [CONSTS.EQUIPMENT_SLOT_HEAD]: null,
             [CONSTS.EQUIPMENT_SLOT_NECK]: null,
@@ -45,6 +51,4 @@ function buildInitialState () {
     }
 }
 
-module.exports = {
-    buildInitialState
-}
+module.exports = buildState

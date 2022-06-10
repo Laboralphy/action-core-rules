@@ -1,60 +1,112 @@
+const CONSTS = require('./consts')
 const deepClone = require('../libs/deep-clone')
+const deepFreeze = require('../libs/deep-freeze')
 const Creature = require('./Creature')
+const path = require('path');
+const TreeSync = require("../libs/tree-sync");
+const { Validator } = require('jsonschema')
+const { suggest } = require("@laboralphy/did-you-mean");
+const Dice = require('../libs/dice')
+
+// BLUEPRINTS
+const BLUEPRINT_PATH = path.resolve(__dirname, './blueprints')
+const ITEM_BLUEPRINTS = TreeSync.recursiveRequire(path.join(BLUEPRINT_PATH, 'items'), true)
+
+const SCHEMAS = {
+    blueprintItem: require('./schemas/blueprint-item.json'),
+    blueprintCreature: {}
+}
 
 /**
- * @typedef ActionBlueprint {object}
- * @property type {string}
- * @property itemType {string}
- * @property stackable {boolean}
- * @property weaponCategory {string}
- * @property weaponType {string}
- * @property ammoType {string} AMMO_TYPE_*
- * @property damage {string}
- * @property damageTypes {string[]}
- * @property reach {string} MELEE WEAPON ONLY
- * @property initiative {number}
- * @property accuracy {number}
- * @property weight {number}
- * @property properties {array}
- * @property rof {number} SMALL ARM ONLY
- * @property clipSize {number} SMALL ARM ONLY
- * @property ammoType {string} SMALL ARM ONLY
+ * @typedef ActionBlueprintWeaponRanged {object}
+ * @property rof {number} rate of fire
+ * @property clipSize {number} number of shots available per combat
+ * @property ammoType {string} type of ammo
  *
- * @typedef ActionItem {object}
+ * @typedef ActionBlueprintWeaponMelee {object}
+ * @property reach {number}
+ * @property material {string}
+ *
+ * @typedef ActionBlueprintWeapon {object}
+ * @property category {string}
+ * @property damage {string}
+ * @property damageTypes {string[]}
+ * @property initiative {number}
+ * @property accuracy {number}
+ * @property minStrength {number}
+ * @property [melee] {ActionBlueprintWeaponMelee}
+ * @property [ranged] {ActionBlueprintWeaponRanged}
+ *
+ * @typedef ActionBlueprintItem {object}
  * @property type {string}
  * @property itemType {string}
  * @property stackable {boolean}
- * @property weaponCategory {string}
- * @property weaponType {string}
- * @property ammoType {string} AMMO_TYPE_*
- * @property damage {string}
- * @property damageTypes {string[]}
- * @property reach {string} MELEE WEAPON ONLY
- * @property initiative {number}
- * @property accuracy {number}
  * @property weight {number}
  * @property properties {array}
- * @property rof {number} SMALL ARM ONLY
- * @property clipSize {number} SMALL ARM ONLY
- * @property ammoType {string} SMALL ARM ONLY
- * @property owner {string} item owner id
- * @property stackCount {string} number of items in the stack (if stackable)
+ * @property [weapon] {ActionBlueprintWeapon}
+ *
  *
  */
 
 class Rules {
     constructor () {
+        this._dice = new Dice()
+        this._validator = new Validator()
         this._items = {}
         this._creatures = {}
-        this._blueprints = {}
+        this._blueprints = {
+            ...ITEM_BLUEPRINTS
+        }
+        this._validBlueprints = {}
+    }
+
+    roll (s) {
+        return this._dice.evaluate(s)
     }
 
     /**
      * Collection of defined blueprints for item creation
-     * @returns {Object.<string, ActionBlueprint>}
+     * @returns {ActionBlueprintItem}
      */
-    get blueprints () {
-        return this._blueprints
+    getBlueprint (resref) {
+        if (resref in this._validBlueprints) {
+            return this._validBlueprints[resref]
+        }
+        if (resref in this._blueprints) {
+            const bp = this._blueprints[resref]
+            let oSchema
+            switch (bp.type) {
+                case CONSTS.ENTITY_TYPE_ITEM: {
+                    oSchema = SCHEMAS.blueprintItem
+                    break
+                }
+
+                case CONSTS.ENTITY_TYPE_CREATURE: {
+                    oSchema = SCHEMAS.blueprintCreature
+                    break
+                }
+
+                default: {
+                    throw new Error('ERR_ENTITY_TYPE_INVALID: ' + bp.type)
+                }
+            }
+            const res = this._validator.validate(bp, SCHEMAS.blueprintItem)
+            if (res.valid) {
+                deepFreeze(bp)
+                this._validBlueprints[resref] = bp
+                return bp
+            } else {
+                res.errors.forEach(err => console.error(err.stack))
+                throw new Error('ERR_BLUEPRINT_INVALID: ' + resref)
+            }
+        } else {
+            const s = suggest(resref, Object.keys(this._blueprints)).join(', ')
+            throw new Error('ERR_BLUEPRINT_NOT_FOUND: ' + resref + ' - suggestion: ' + s)
+        }
+    }
+
+    addBlueprint (sResRef, oBlueprint) {
+        this._blueprints[sResRef] = oBlueprint
     }
 
     /**
@@ -65,7 +117,7 @@ class Rules {
      * @returns {*|{}|number|string|boolean}
      */
     createItem (id, sResRef, stackCount = 1) {
-        const blueprint = this._blueprints[sResRef]
+        const blueprint = this.getBlueprint(sResRef)
         const bStackable = blueprint.stackable
         if (!bStackable && stackCount !== 1) {
             throw new Error('ERR_NON_STACKABLE_ITEM_MUST_HAVE_ONE_STACKCOUNT: given ' + stackCount)
@@ -129,4 +181,18 @@ class Rules {
         oItem.owner = idCreature
         oCreature.store.mutations.equipItem({ slot, item: oItem })
     }
+
+    /**
+     * Effectue un jet d'attaque
+     */
+    computeInitiative (oAttacker, oDefender) {
+        const nAtkIni = oAttacker.store.getAttributeINI + this.roll('1d6')
+        const nDefIni = oDefneder.store.getAttributeINI + this.roll('1d6')
+        if (nAtkIni !== nDefIni) {
+            return nAtkIni > nDefIni
+        }
+        if ()
+    }
 }
+
+module.exports = Rules
