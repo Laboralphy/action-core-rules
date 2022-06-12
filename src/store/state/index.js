@@ -17,7 +17,7 @@ function buildState () {
                 ini: { weights: { ref: 0.5, int: 0.5 }, add: 0 },
                 tgh: { weights: { str: 0.5, wil: 0.5 }, add: 0 },
                 lif: { weights: { hlt: 3.0, wil: 2.0 }, add: 0 },
-                mov: { weights: { ref: 1.0, str: 0.5, hlt: 0.5 } }
+                mov: { weights: { ref: 1.0, str: 0.5, hlt: 0.5 }, add: 0 }
             },
         },
         gauges: {

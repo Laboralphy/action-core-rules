@@ -136,11 +136,13 @@ class Rules {
     /**
      * Creates an instance of Creature
      * @param id {string} new creature id
+     * @return {Creature}
      */
     createCreature (id) {
         const oCreature = new Creature()
         oCreature.id = id
         this._creatures[id] = oCreature
+        return oCreature
     }
 
     /**
@@ -183,15 +185,23 @@ class Rules {
     }
 
     /**
-     * Effectue un jet d'attaque
+     * Calcule la meilleure initiative entre un attaquant et un defenseur
      */
     computeInitiative (oAttacker, oDefender) {
-        const nAtkIni = oAttacker.store.getAttributeINI + this.roll('1d6')
-        const nDefIni = oDefneder.store.getAttributeINI + this.roll('1d6')
+        const nAtkIni =
+            oAttacker.store.getAttributeINI +
+            oAttacker.store.getEquippedWeaponINIBonus +
+            this.roll('1d6')
+        const nDefIni =
+            oDefender.store.getAttributeINI +
+            oDefender.store.getEquippedWeaponINIBonus +
+            this.roll('1d6')
         if (nAtkIni !== nDefIni) {
             return nAtkIni > nDefIni
         }
-        if ()
+        const nAtkInt = oAttacker.store.getAttributeINT
+        const nDefInt = oDefender.store.getAttributeINT
+        return nAtkInt >= nDefInt
     }
 }
 

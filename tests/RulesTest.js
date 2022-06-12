@@ -17,3 +17,12 @@ describe('Rules item creation', function () {
         expect(oItem.resref).toBe('wpn-blunt-club')
     })
 })
+
+describe('computeInitiative', function () {
+    it('attacker shoot first', function () {
+        const r = new Rules()
+        const oAtk = r.createCreature('a1')
+        const oDef = r.createCreature('d1')
+
+    })
+})
