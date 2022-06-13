@@ -4,8 +4,8 @@ const Reactor = require('../libs/o876-rudimentary-reactor')
 const TreeSync = require('../libs/tree-sync')
 
 // STORE
-const STORE_PATH = path.resolve(__dirname, './store')
-const buildState = require('./store/state')
+const STORE_PATH = path.resolve(__dirname, './store/creature')
+const buildState = require(path.join(STORE_PATH, 'state'))
 const MUTATIONS = TreeSync.recursiveRequire(path.join(STORE_PATH, 'mutations'))
 const GETTERS = TreeSync.recursiveRequire(path.join(STORE_PATH, 'getters'))
 

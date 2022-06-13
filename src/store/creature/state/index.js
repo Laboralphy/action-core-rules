@@ -1,4 +1,4 @@
-const CONSTS = require('../../consts')
+const CONSTS = require('../../../consts')
 
 function buildState () {
     return {
@@ -33,7 +33,6 @@ function buildState () {
         },
         skills: [],
         effects: [],
-        weaponUsed: CONSTS.EQUIPMENT_SLOT_MELEEWEAPON,
         equipment: {
             [CONSTS.EQUIPMENT_SLOT_HEAD]: null,
             [CONSTS.EQUIPMENT_SLOT_NECK]: null,
@@ -46,7 +45,14 @@ function buildState () {
             [CONSTS.EQUIPMENT_SLOT_RIGHTFINGER]: null,
             [CONSTS.EQUIPMENT_SLOT_MELEEWEAPON]: null,
             [CONSTS.EQUIPMENT_SLOT_RANGEDWEAPON]: null,
+            [CONSTS.EQUIPMENT_SLOT_SHIELD]: null,
             [CONSTS.EQUIPMENT_SLOT_AMMO]: null
+        },
+        encumbrance: 0,
+        combat: {
+            aware: true,
+            weaponUsed: CONSTS.EQUIPMENT_SLOT_MELEEWEAPON,
+            isAtOptimalDistance: false
         }
     }
 }

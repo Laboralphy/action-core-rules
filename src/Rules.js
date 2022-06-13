@@ -1,4 +1,5 @@
 const CONSTS = require('./consts')
+const CONFIG = require('./config')
 const deepClone = require('../libs/deep-clone')
 const deepFreeze = require('../libs/deep-freeze')
 const Creature = require('./Creature')
@@ -185,23 +186,86 @@ class Rules {
     }
 
     /**
+     * Déterminer qui de l'attaquant ou du defenseur
+     * @param oAttacker
+     * @param oDefender
+     * @returns {string}
+     */
+    computeWeaponReaches (oAttacker, oDefender) {
+        if (oAttacker.store.getters.getEquippedWeaponReach === oDefender.store.getters.getEquippedWeaponReach) {
+            return CONSTS.COMBAT_WEAPON_REACH_BALANCED
+        }
+        const bAtkOD = oAttacker.store.getters.isAtOptimalDistance
+        const bDefOD = oDefender.store.getters.isAtOptimalDistance
+        if (bAtkOD && !bDefOD) {
+            return CONSTS.COMBAT_WEAPON_REACH_ATTACKER_ADVANTAGED
+        }
+        if (!bAtkOD && bDefOD) {
+            return CONSTS.COMBAT_WEAPON_REACH_DEFENDER_ADVANTAGED
+        }
+        return CONSTS.COMBAT_WEAPON_REACH_BALANCED
+    }
+
+    /**
      * Calcule la meilleure initiative entre un attaquant et un defenseur
+     * @return {boolean} true = attacker attaque ne premier, false = défenseur attaque en premier
      */
     computeInitiative (oAttacker, oDefender) {
-        const nAtkIni =
+        let nAtkIni =
             oAttacker.store.getAttributeINI +
             oAttacker.store.getEquippedWeaponINIBonus +
             this.roll('1d6')
-        const nDefIni =
+        let nDefIni =
             oDefender.store.getAttributeINI +
             oDefender.store.getEquippedWeaponINIBonus +
             this.roll('1d6')
+        // bonus de portée d'arme
+        const bAtkOD = oAttacker.store.getters.isAtOptimalDistance
+        const bDefOD = oDefender.store.getters.isAtOptimalDistance
+
+        if (bAtkOD && !bDefOD) {
+            // L'attaquant est à distance optimale mais pas le défenseur
+            nAtkIni += CONFIG.INITIATIVE_BONUS_REACH_ADVANTAGE
+        }
+
+        if (!bAtkOD && bDefOD) {
+            // Le défenseur est à distance optimale mais pas l'attaquant'
+            nDefIni += CONFIG.INITIATIVE_BONUS_REACH_ADVANTAGE
+        }
+
         if (nAtkIni !== nDefIni) {
             return nAtkIni > nDefIni
         }
         const nAtkInt = oAttacker.store.getAttributeINT
         const nDefInt = oDefender.store.getAttributeINT
         return nAtkInt >= nDefInt
+    }
+
+    /**
+     * Calcule la défense d'une creature
+     * @param oDefender
+     * @param oAttacker
+     * @returns {number}
+     */
+    computeDefense (oDefender, oAttacker) {
+        let nDef = oDefender.store.getters.getDefense
+        // Bonus de situation lorsque les deux combattants n'ont pas la même portée d'arme
+        const nReachAtk = oAttacker.store.getter.getEquippedWeaponReach
+        const nReachDef = oDefender.store.getter.getEquippedWeaponReach
+        if (nReachDef > nReachAtk) {
+            // L'arme du défenseur est plus longue que l'arme de l'attaquant
+            nDef += CONFIG.DEFENSE_BONUS_REACH_ADVANTAGE
+        }
+        return nDef
+    }
+
+
+
+    /**
+     * Détermine le jet d'attaque d'une creature
+     */
+    computeAttack (oAttacker, oDefender) {
+
     }
 }
 
