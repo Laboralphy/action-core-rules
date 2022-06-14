@@ -5,7 +5,7 @@
   "weight": 2,
   "properties": [],
   "weapon": {
-    "category": "WEAPON_CATEGORY_PISTOL",
+    "category": "WEAPON_CATEGORY_RIFLE",
     "damage": "6d6",
     "damageTypes": ["DAMAGE_TYPE_PENETRATING", "DAMAGE_TYPE_LETHAL"],
     "initiative": 0,

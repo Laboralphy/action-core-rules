@@ -48,9 +48,8 @@ module.exports = {
     SKILL_MELEE_WEAPON_BLUNT: 'SKILL_MELEE_WEAPON_BLUNT', // masse, marteau
     SKILL_MELEE_WEAPON_AXE: 'SKILL_MELEE_WEAPON_AXE', // hachette, hache d'arme
     SKILL_MELEE_WEAPON_POLEARM: 'SKILL_MELEE_WEAPON_POLEARM', // baton, halebarde...
-
-
-    SKILL_MISSILE_WEAPON: 'SKILL_MISSILE_WEAPON', // arbalète, arc, fronde
-    SKILL_SMALL_ARM: 'SKILL_SMALL_ARM', // Pistolets, fusil d'assaut
+    SKILL_SIMPLE_MISSILE_WEAPON: 'SKILL_MISSILE_WEAPON', // arbalète, arc, fronde
+    SKILL_SMALL_ARM_PISTOL: 'SKILL_SMALL_ARM_PISTOL', // Arme à feu, Pistolets
+    SKILL_SMALL_ARM_RIFLE: 'SKILL_SMALL_ARM_RIFLE', // Arme à feu, Fusils
 
 }
