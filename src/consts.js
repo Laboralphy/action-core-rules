@@ -41,5 +41,16 @@ module.exports = {
     EQUIPMENT_SLOT_MELEEWEAPON: 'meleeWeapon',
     EQUIPMENT_SLOT_RANGEDWEAPON: 'rangedWeapon',
     EQUIPMENT_SLOT_SHIELD: 'shield',
-    EQUIPMENT_SLOT_AMMO: 'ammo'
+    EQUIPMENT_SLOT_AMMO: 'ammo',
+
+    SKILL_MELEE_WEAPON: 'SKILL_MELEE_WEAPON', // épée, masse, dague
+    SKILL_MELEE_WEAPON_BLADE: 'SKILL_MELEE_WEAPON_BLADE', // épée, dague
+    SKILL_MELEE_WEAPON_BLUNT: 'SKILL_MELEE_WEAPON_BLUNT', // masse, marteau
+    SKILL_MELEE_WEAPON_AXE: 'SKILL_MELEE_WEAPON_AXE', // hachette, hache d'arme
+    SKILL_MELEE_WEAPON_POLEARM: 'SKILL_MELEE_WEAPON_POLEARM', // baton, halebarde...
+
+
+    SKILL_MISSILE_WEAPON: 'SKILL_MISSILE_WEAPON', // arbalète, arc, fronde
+    SKILL_SMALL_ARM: 'SKILL_SMALL_ARM', // Pistolets, fusil d'assaut
+
 }

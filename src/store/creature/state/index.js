@@ -31,7 +31,9 @@ function buildState () {
             level: 0, // level increases when experience is above a certain cap.
             cp: 0, // character points earned when leveling
         },
-        skills: [],
+        skills: {
+
+        },
         effects: [],
         equipment: {
             [CONSTS.EQUIPMENT_SLOT_HEAD]: null,

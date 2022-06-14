@@ -186,21 +186,24 @@ class Rules {
     }
 
     /**
-     * Déterminer qui de l'attaquant ou du defenseur
+     * Déterminer qui de l'attaquant ou du defenseur dispose de l'avantage de portée optimale
      * @param oAttacker
      * @param oDefender
      * @returns {string}
      */
     computeWeaponReaches (oAttacker, oDefender) {
         if (oAttacker.store.getters.getEquippedWeaponReach === oDefender.store.getters.getEquippedWeaponReach) {
+            // Les deux combattants utilisent des armes de même portée
             return CONSTS.COMBAT_WEAPON_REACH_BALANCED
         }
         const bAtkOD = oAttacker.store.getters.isAtOptimalDistance
         const bDefOD = oDefender.store.getters.isAtOptimalDistance
         if (bAtkOD && !bDefOD) {
+            // l'attaquant à l'avantage
             return CONSTS.COMBAT_WEAPON_REACH_ATTACKER_ADVANTAGED
         }
         if (!bAtkOD && bDefOD) {
+            // le defenseur a l'avantage
             return CONSTS.COMBAT_WEAPON_REACH_DEFENDER_ADVANTAGED
         }
         return CONSTS.COMBAT_WEAPON_REACH_BALANCED
@@ -265,6 +268,10 @@ class Rules {
      * Détermine le jet d'attaque d'une creature
      */
     computeAttack (oAttacker, oDefender) {
+        // Déterminer l'arme utilisée pour l'attaque
+        const oWeapon = oAttacker.store.getters.getEquippedWeapon
+        // Déterminer la catégory de l'arme
+        const sCategory = oWeapon.blueprint.weapon.category
 
     }
 }
